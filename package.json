@@ -1,0 +1,14 @@
+{
+  "name": "strava2notionjs",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^1.0.4",
+    "dotenv": "^8.6.0",
+    "express": "^4.19.2",
+    "https": "^1.0.0"
+  }
+}
