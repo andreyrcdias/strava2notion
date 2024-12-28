@@ -1,9 +1,7 @@
 const { Client } = require('@notionhq/client');
 
-// Initialize the Notion client
 const notion = new Client({ auth: process.env.NOTION_TOKEN});
 
-// Add data to the Notion database
 async function addToNotionDatabase(databaseId, activity) {
   try {
     await notion.pages.create({
@@ -57,7 +55,7 @@ async function addToNotionDatabase(databaseId, activity) {
           }
         },
         'Calories': {
-          number: activity.calories || 0 // Default to 0 if undefined
+          number: activity.calories || 0
         }
       }
     });

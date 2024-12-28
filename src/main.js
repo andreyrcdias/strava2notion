@@ -5,7 +5,7 @@ const { addToNotionDatabase } = require('./integrations/notionIntegration');
 
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
-// Main function to fill the Notion database with Strava activities
+// Main function
 async function fillNotionDatabase() {
   try {
     const activities = await getStravaActivities();

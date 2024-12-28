@@ -1,7 +1,6 @@
 const https = require('https');
 const { getStravaAccessToken } = require('../config/strava');
 
-// Helper function to make GET requests
 async function fetchJson(url, headers) {
   return new Promise((resolve, reject) => {
     const options = {
@@ -24,7 +23,6 @@ async function fetchJson(url, headers) {
   });
 }
 
-// Convert pace from min/km to min/mile
 function convertPaceToMinPerMile(paceInMinPerKm) {
   const minPerMile = paceInMinPerKm * 1.60934;
   const minutes = Math.floor(minPerMile);
@@ -32,12 +30,10 @@ function convertPaceToMinPerMile(paceInMinPerKm) {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds} min/mile`;
 }
 
-// Convert distance from meters to miles
 function convertMetersToMiles(meters) {
   return meters * 0.000621371;
 }
 
-// Fetch activities from Strava
 async function getStravaActivities() {
   const accessToken = await getStravaAccessToken();
   const headers = {
@@ -46,7 +42,6 @@ async function getStravaActivities() {
 
   const activitiesResponse = await fetchJson('https://www.strava.com/api/v3/athlete/activities', headers);
 
-  // Log the response to understand its structure
   console.log('Activities Response:', activitiesResponse);
 
   if (!Array.isArray(activitiesResponse)) {

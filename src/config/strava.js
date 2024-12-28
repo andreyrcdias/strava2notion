@@ -1,7 +1,6 @@
 const https = require('https');
 const querystring = require('querystring');
 
-// Function to get Strava access token
 async function getStravaAccessToken() {
   const postData = querystring.stringify({
     client_id: process.env.STRAVA_CLIENT_ID,

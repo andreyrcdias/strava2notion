@@ -1,7 +1,6 @@
 const express = require('express');
 const https = require('https');
 const querystring = require('querystring');
-// require('./utils/dotenv');
 require('dotenv');
 
 const app = express();
