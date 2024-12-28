@@ -49,10 +49,7 @@ cp .env-example .env
 npm install
 ```
 ## Step 5: Run the OAuth Flow
-
 1. Start the OAuth Server:
-Shell
-
 ```shell
 node src/server.js
 ```
