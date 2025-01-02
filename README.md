@@ -42,7 +42,7 @@
 cp .env-example .env
 ```
 > [!WARNING]
-> Please note that you will have to update your .env file with your STRAVA_ACCESS_TOKEN and STRAVA_REFRESH_TOKEN after completing Strava’s OAuth flow.
+> Please note that you will have to update your .env file with your `STRAVA_ACCESS_TOKEN` and `STRAVA_REFRESH_TOKEN` after completing Strava’s OAuth flow.
 
 ## Step 4: Install Packages
 ```shell
