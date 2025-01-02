@@ -68,3 +68,7 @@ node src/server.js
 ```shell
 npm start
 ```
+
+## TODO
+- [ ] Migrate to TypeScript
+
