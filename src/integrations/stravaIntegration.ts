@@ -1,7 +1,9 @@
-const https = require('https');
-const { getStravaAccessToken } = require('../config/strava');
+import https from 'https';
+import { getStravaAccessToken } from '../config/strava';
+import { Activity, StravaActivity }  from '../types';
 
-async function fetchJson(url, headers) {
+
+async function fetchJson(url: string, headers: Record<string, string>): Promise<any> {
   return new Promise((resolve, reject) => {
     const options = {
       headers: headers
@@ -23,24 +25,24 @@ async function fetchJson(url, headers) {
   });
 }
 
-function convertPaceToMinPerMile(paceInMinPerKm) {
+function convertPaceToMinPerMile(paceInMinPerKm: number): string {
   const minPerMile = paceInMinPerKm * 1.60934;
   const minutes = Math.floor(minPerMile);
   const seconds = Math.round((minPerMile - minutes) * 60);
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds} min/mile`;
 }
 
-function convertMetersToMiles(meters) {
+function convertMetersToMiles(meters: number): number {
   return meters * 0.000621371;
 }
 
-async function getStravaActivities() {
+async function getStravaActivities(): Promise<Activity[]> {
   const accessToken = await getStravaAccessToken();
   const headers = {
     'Authorization': `Bearer ${accessToken}`
   };
 
-  const activitiesResponse = await fetchJson('https://www.strava.com/api/v3/athlete/activities', headers);
+  const activitiesResponse: StravaActivity[] = await fetchJson('https://www.strava.com/api/v3/athlete/activities', headers);
 
   console.log('Activities Response:', activitiesResponse);
 
@@ -66,4 +68,4 @@ async function getStravaActivities() {
   });
 }
 
-module.exports = { getStravaActivities };
+export { getStravaActivities };

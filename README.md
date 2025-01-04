@@ -48,10 +48,16 @@ cp .env-example .env
 ```shell
 npm install
 ```
-## Step 5: Run the OAuth Flow
+
+## Step 5: Build the project
+```shell
+npm run build
+```
+
+## Step 6: Run the OAuth Flow
 1. Start the OAuth Server:
 ```shell
-node src/server.js
+node run server
 ```
 2. Open your browser and navigate to http://localhost:3000:
     - You should see a page with a link to authorize with Strava.
@@ -64,11 +70,7 @@ node src/server.js
 6. Copy the refresh token and update your .env file with it.
 
 
-## Step 6: Run the Integration
+## Step 7: Run the Integration
 ```shell
 npm start
 ```
-
-## TODO
-- [ ] Migrate to TypeScript
-
