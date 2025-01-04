@@ -1,7 +1,7 @@
-const https = require('https');
-const querystring = require('querystring');
+import https from 'https';
+import querystring from 'querystring';
 
-async function getStravaAccessToken() {
+async function getStravaAccessToken(): Promise<string> {
   const postData = querystring.stringify({
     client_id: process.env.STRAVA_CLIENT_ID,
     client_secret: process.env.STRAVA_CLIENT_SECRET,
@@ -9,7 +9,7 @@ async function getStravaAccessToken() {
     grant_type: 'refresh_token'
   });
 
-  const options = {
+  const options: https.RequestOptions = {
     hostname: 'www.strava.com',
     path: '/oauth/token',
     method: 'POST',
@@ -45,4 +45,4 @@ async function getStravaAccessToken() {
   });
 }
 
-module.exports = { getStravaAccessToken };
+export { getStravaAccessToken };

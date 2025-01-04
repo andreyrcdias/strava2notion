@@ -1,0 +1,25 @@
+import dotenv from 'dotenv';
+import { getStravaActivities } from './integrations/stravaIntegration';
+import { addToNotionDatabase } from './integrations/notionIntegration';
+import { Activity } from './types';
+
+dotenv.config();
+
+const NOTION_DATABASE_ID: string | undefined = process.env.NOTION_DATABASE_ID;
+
+
+// Main function
+async function fillNotionDatabase(): Promise<void> {
+  try {
+    const activities: Activity[] = await getStravaActivities();
+
+    for (const activity of activities) {
+      await addToNotionDatabase(NOTION_DATABASE_ID as string, activity);
+      console.log(`Added to Notion: Name: ${activity.name}, Distance: ${activity.distance}, Pace: ${activity.pace}`);
+    }
+  } catch (error) {
+    console.error('Error filling Notion database:', error);
+  }
+}
+
+fillNotionDatabase();
