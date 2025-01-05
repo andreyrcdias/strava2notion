@@ -37,6 +37,7 @@ async function getStravaActivities(): Promise<Activity[]> {
     'Authorization': `Bearer ${accessToken}`
   };
 
+  // TODO: implement pagination
   const getActivitiesUrl = 'https://www.strava.com/api/v3/athlete/activities';
   const activitiesResponse: StravaActivity[] = await fetchJson(getActivitiesUrl, headers);
 
