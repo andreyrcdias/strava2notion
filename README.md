@@ -1,6 +1,6 @@
 # strava2notion
 Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-strava-activity-in-notion)
-* [Strava API v3](https://developers.strava.com/docs/reference/)
+* [Strava API v3 Reference](https://developers.strava.com/docs/reference/)
 * [Notion API Reference](https://developers.notion.com/reference/intro)
 
 
