@@ -1,6 +1,6 @@
 import https from 'https';
 import { getStravaAccessToken } from '../config/strava';
-import { Activity, StravaActivity }  from '../types';
+import { Activity, StravaActivity } from '../types';
 
 
 async function fetchJson(url: string, headers: Record<string, string>): Promise<any> {
@@ -25,15 +25,10 @@ async function fetchJson(url: string, headers: Record<string, string>): Promise<
   });
 }
 
-function convertPaceToMinPerMile(paceInMinPerKm: number): string {
-  const minPerMile = paceInMinPerKm * 1.60934;
-  const minutes = Math.floor(minPerMile);
-  const seconds = Math.round((minPerMile - minutes) * 60);
-  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds} min/mile`;
-}
-
-function convertMetersToMiles(meters: number): number {
-  return meters * 0.000621371;
+function convertPaceToMinPerKm(paceInMinPerKm: number): string {
+  const minutes = Math.floor(paceInMinPerKm);
+  const seconds = Math.round((paceInMinPerKm - minutes) * 60);
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds} min/km`;
 }
 
 async function getStravaActivities(): Promise<Activity[]> {
@@ -42,23 +37,24 @@ async function getStravaActivities(): Promise<Activity[]> {
     'Authorization': `Bearer ${accessToken}`
   };
 
-  const activitiesResponse: StravaActivity[] = await fetchJson('https://www.strava.com/api/v3/athlete/activities', headers);
+  const getActivitiesUrl = 'https://www.strava.com/api/v3/athlete/activities';
+  const activitiesResponse: StravaActivity[] = await fetchJson(getActivitiesUrl, headers);
 
-  console.log('Activities Response:', activitiesResponse);
+  // console.log('Activities Response:', activitiesResponse);
 
   if (!Array.isArray(activitiesResponse)) {
     throw new Error('Invalid response from Strava API');
   }
 
   return activitiesResponse.map(activity => {
-    const paceInMinPerKm = (activity.moving_time / 60) / (activity.distance / 1000);
-    const paceInMinPerMile = convertPaceToMinPerMile(paceInMinPerKm);
-    const distanceInMiles = convertMetersToMiles(activity.distance);
+    const paceInMinPerKm = convertPaceToMinPerKm((activity.moving_time / 60) / (activity.distance / 1000));
+    const distanceInKm = Math.round((activity.distance / 1000) * 100) / 100; // Round to 2 decimal places
+
 
     return {
       name: activity.name,
-      distance: distanceInMiles,
-      pace: paceInMinPerMile,
+      distance: distanceInKm,
+      pace: paceInMinPerKm,
       duration: new Date(activity.moving_time * 1000).toISOString().substr(11, 8), // Duration in HH:MM:SS
       elevation_gain: activity.total_elevation_gain,
       type: activity.type,
