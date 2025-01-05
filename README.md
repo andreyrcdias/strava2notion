@@ -70,7 +70,7 @@ node run server
     - Strava will redirect you to a page with an authorization code.
 5. The server will exchange the authorization code for an access token and refresh token:
     - The tokens will be displayed on the page.
-6. Copy the refresh token and update your .env file with it.
+6. Copy the refresh token and update your `.env` file with it.
 
 
 ## Step 7: Run the Integration
