@@ -1,9 +1,13 @@
-const { Client } = require('@notionhq/client');
+import { Client } from '@notionhq/client';
+import { Activity } from '../types';
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN});
+const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
-async function addToNotionDatabase(databaseId, activity) {
+async function addToNotionDatabase(databaseId: string, activity: Activity): Promise<void> {
   try {
+    console.log('Added to Notion:');
+    console.log(activity);
+
     await notion.pages.create({
       parent: { database_id: databaseId },
       properties: {
@@ -64,5 +68,4 @@ async function addToNotionDatabase(databaseId, activity) {
   }
 }
 
-module.exports = { addToNotionDatabase };
-
+export { addToNotionDatabase };
