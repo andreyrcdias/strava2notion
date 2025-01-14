@@ -37,20 +37,30 @@ async function getStravaActivities(): Promise<Activity[]> {
     'Authorization': `Bearer ${accessToken}`
   };
 
-  // TODO: implement pagination
   const getActivitiesUrl = 'https://www.strava.com/api/v3/athlete/activities';
-  const activitiesResponse: StravaActivity[] = await fetchJson(getActivitiesUrl, headers);
+  let page = 1;
+  const perPage = 30;
+  let activities: StravaActivity[] = [];
 
-  // console.log('Activities Response:', activitiesResponse);
+  while (true) {
+    const activitiesResponse: StravaActivity[] = await fetchJson(`${getActivitiesUrl}?page=${page}&per_page=${perPage}`, headers);
+    // console.log('Activities Response:', activitiesResponse);
+    if (activitiesResponse.length === 0) {
+      break;
+    }
+    activities = activities.concat(activitiesResponse);
+    page++;
+  }
+  console.log('Total activities fetched:', allActivities.length);
 
-  if (!Array.isArray(activitiesResponse)) {
+
+  if (!Array.isArray(activities)) {
     throw new Error('Invalid response from Strava API');
   }
 
-  return activitiesResponse.map(activity => {
+  return activities.map(activity => {
     const paceInMinPerKm = convertPaceToMinPerKm((activity.moving_time / 60) / (activity.distance / 1000));
     const distanceInKm = Math.round((activity.distance / 1000) * 100) / 100; // Round to 2 decimal places
-
 
     return {
       name: activity.name,
