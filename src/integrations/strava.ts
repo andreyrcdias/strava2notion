@@ -51,7 +51,7 @@ async function getStravaActivities(): Promise<Activity[]> {
     activities = activities.concat(activitiesResponse);
     page++;
   }
-  console.log('Total activities fetched:', allActivities.length);
+  console.log('Total activities fetched:', activities.length);
 
 
   if (!Array.isArray(activities)) {
