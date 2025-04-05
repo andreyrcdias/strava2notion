@@ -7,7 +7,7 @@ export interface Activity {
   elevation_gain: number
   type: string
   date: string
-  calories?: number
+  // calories?: number
 }
 
 export interface StravaActivity {
@@ -18,5 +18,5 @@ export interface StravaActivity {
   total_elevation_gain: number
   type: string
   start_date: string
-  calories?: number
+  // calories?: number
 }
