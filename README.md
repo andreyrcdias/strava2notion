@@ -1,5 +1,7 @@
 # strava2notion
 Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-strava-activity-in-notion)
+
+## References
 * [Strava API v3 Reference](https://developers.strava.com/docs/reference/)
 * [Notion API Reference](https://developers.notion.com/reference/intro)
 
@@ -40,10 +42,19 @@ Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-
 - Click on the three dots in the top-right corner of the page.
 - Under Connections, click on Connect to and search for your integration and invite it.
 
-## Step 3: Create .env file
+## Step 3: Create `.env` file
 ```shell
 cp .env-example .env
 ```
+```shell
+NOTION_TOKEN=
+NOTION_DATABASE_ID=
+STRAVA_CLIENT_ID=
+STRAVA_CLIENT_SECRET=
+STRAVA_ACCESS_TOKEN=
+STRAVA_REFRESH_TOKEN=
+```
+
 > [!WARNING]
 > Please note that you will have to update your .env file with your `STRAVA_ACCESS_TOKEN` and `STRAVA_REFRESH_TOKEN` after completing Strava’s OAuth flow.
 
