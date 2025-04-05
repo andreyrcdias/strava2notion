@@ -1,7 +1,6 @@
 import { Client } from '@notionhq/client';
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { Activity } from '../types';
-import { LOG_LEVEL, LogLevel } from '../consts';
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 

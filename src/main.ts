@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import { getStravaActivities } from './integrations/strava';
 import { addToNotionDatabase, existsAcitivity } from './integrations/notion';
 import { Activity } from './types';
-import { NOTION_DATABASE_ID, LOG_LEVEL, LogLevel } from './consts';
+import { NOTION_DATABASE_ID } from './consts';
 
 dotenv.config();
 
