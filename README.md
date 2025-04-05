@@ -106,3 +106,8 @@ node run server
 npm start
 ```
 
+## Maintenance
+
+```shell
+npx prettier --write .
+```
