@@ -1,16 +1,41 @@
 import { Client } from '@notionhq/client';
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { Activity } from '../types';
+import { LOG_LEVEL, LogLevel } from '../consts';
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
+async function existsAcitivity(databaseId: string, activityId: number): Promise<boolean> {
+  const page: QueryDatabaseResponse = await notion.databases.query({
+    database_id: databaseId,
+    filter: {
+      property: "ID",
+      number: {
+        equals: activityId
+      }
+    },
+  });
+  if (page.results.length == 0) {
+    return false;
+  }
+  const firstResult = page.results[0] as Record<string, any>;
+  const idProperty = firstResult.properties?.ID;
+  if (idProperty && idProperty.type == 'number') {
+    if (idProperty.number = activityId) {
+      return true;
+    }
+  }
+  return false;
+}
+
 async function addToNotionDatabase(databaseId: string, activity: Activity): Promise<void> {
   try {
-    console.log('Added to Notion:');
-    console.log(activity);
-
     await notion.pages.create({
       parent: { database_id: databaseId },
       properties: {
+        'ID': {
+          number: activity.id
+        },
         'Name': {
           title: [
             {
@@ -58,9 +83,9 @@ async function addToNotionDatabase(databaseId: string, activity: Activity): Prom
             start: activity.date
           }
         },
-        'Calories': {
-          number: activity.calories || 0
-        }
+        // 'Calories': {
+        //   number: activity.calories || 0
+        // }
       }
     });
   } catch (error) {
@@ -68,4 +93,4 @@ async function addToNotionDatabase(databaseId: string, activity: Activity): Prom
   }
 }
 
-export { addToNotionDatabase };
+export { existsAcitivity, addToNotionDatabase };

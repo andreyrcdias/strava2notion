@@ -2,7 +2,6 @@ import https from 'https';
 import { getStravaAccessToken } from '../config/strava';
 import { Activity, StravaActivity } from '../types';
 
-
 async function fetchJson(url: string, headers: Record<string, string>): Promise<any> {
   return new Promise((resolve, reject) => {
     const options = {
@@ -44,15 +43,12 @@ async function getStravaActivities(): Promise<Activity[]> {
 
   while (true) {
     const activitiesResponse: StravaActivity[] = await fetchJson(`${getActivitiesUrl}?page=${page}&per_page=${perPage}`, headers);
-    // console.log('Activities Response:', activitiesResponse);
     if (activitiesResponse.length === 0) {
       break;
     }
     activities = activities.concat(activitiesResponse);
     page++;
   }
-  console.log('Total activities fetched:', activities.length);
-
 
   if (!Array.isArray(activities)) {
     throw new Error('Invalid response from Strava API');
@@ -63,6 +59,7 @@ async function getStravaActivities(): Promise<Activity[]> {
     const distanceInKm = Math.round((activity.distance / 1000) * 100) / 100; // Round to 2 decimal places
 
     return {
+      id: activity.id,
       name: activity.name,
       distance: distanceInKm,
       pace: paceInMinPerKm,
@@ -70,7 +67,7 @@ async function getStravaActivities(): Promise<Activity[]> {
       elevation_gain: activity.total_elevation_gain,
       type: activity.type,
       date: activity.start_date,
-      calories: activity.calories
+      // calories: activity.calories  // TODO: we need to getActivityById to retrieve this info.
     };
   });
 }

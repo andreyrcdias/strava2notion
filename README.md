@@ -28,6 +28,7 @@ Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-
 
 ## Step 2: Set Up Your Notion Database
 1. [Create a new database in Notion](https://www.notion.com/help/guides/creating-a-database) with the following properties:
+- ID (Title)
 - Name (Title)
 - Distance (Number)
 - Pace (Text)
@@ -35,7 +36,7 @@ Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-
 - Elevation Gain (Number)
 - Type (Text)
 - Date (Date)
-- Calories (Number)
+<!-- - Calories (Number) -->
 2. Share the database with your integration:
 - Click on the **three dots** in the top-right corner of the page.
 - Under Connections, click on **Connect** to and search for your integration and invite it.

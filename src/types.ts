@@ -1,4 +1,5 @@
 export interface Activity {
+  id: number;
   name: string;
   distance: number;
   pace: string;
@@ -10,6 +11,7 @@ export interface Activity {
 }
 
 export interface StravaActivity {
+  id: number;
   name: string;
   distance: number;
   moving_time: number;
