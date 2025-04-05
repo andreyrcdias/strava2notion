@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
-import { getStravaActivities } from './integrations/strava'
-import { addToNotionDatabase, existsAcitivity } from './integrations/notion'
+import { getStravaActivities } from './strava'
+import { addToNotionDatabase, existsAcitivity } from './notion'
 import { Activity } from './types'
 import { NOTION_DATABASE_ID } from './consts'
 

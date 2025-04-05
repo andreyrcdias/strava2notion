@@ -1,7 +1,9 @@
+import dotenv from 'dotenv'
 import { Client } from '@notionhq/client'
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
-import { Activity } from '../types'
+import { Activity } from './types'
 
+dotenv.config()
 const notion = new Client({ auth: process.env.NOTION_TOKEN })
 
 async function existsAcitivity(
