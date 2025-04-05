@@ -1,95 +1,101 @@
-import { Client } from '@notionhq/client';
-import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
-import { Activity } from '../types';
+import { Client } from '@notionhq/client'
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
+import { Activity } from '../types'
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
+const notion = new Client({ auth: process.env.NOTION_TOKEN })
 
-async function existsAcitivity(databaseId: string, activityId: number): Promise<boolean> {
+async function existsAcitivity(
+  databaseId: string,
+  activityId: number
+): Promise<boolean> {
   const page: QueryDatabaseResponse = await notion.databases.query({
     database_id: databaseId,
     filter: {
-      property: "ID",
+      property: 'ID',
       number: {
-        equals: activityId
-      }
+        equals: activityId,
+      },
     },
-  });
+  })
   if (page.results.length == 0) {
-    return false;
+    return false
   }
-  const firstResult = page.results[0] as Record<string, any>;
-  const idProperty = firstResult.properties?.ID;
+  const firstResult = page.results[0] as Record<string, any>
+  const idProperty = firstResult.properties?.ID
   if (idProperty && idProperty.type == 'number') {
-    if (idProperty.number = activityId) {
-      return true;
+    if ((idProperty.number = activityId)) {
+      return true
     }
   }
-  return false;
+  return false
 }
 
-async function addToNotionDatabase(databaseId: string, activity: Activity): Promise<void> {
+async function addToNotionDatabase(
+  databaseId: string,
+  activity: Activity
+): Promise<void> {
   try {
     await notion.pages.create({
       parent: { database_id: databaseId },
       properties: {
-        'ID': {
-          number: activity.id
+        ID: {
+          number: activity.id,
         },
-        'Name': {
+        Name: {
           title: [
             {
               text: {
-                content: activity.name
-              }
-            }
-          ]
+                content: activity.name,
+              },
+            },
+          ],
         },
-        'Distance': {
-          number: activity.distance
+        Distance: {
+          number: activity.distance,
         },
-        'Pace': {
+        Pace: {
           rich_text: [
             {
               text: {
-                content: activity.pace
-              }
-            }
-          ]
+                content: activity.pace,
+              },
+            },
+          ],
         },
-        'Duration': {
+        Duration: {
           rich_text: [
             {
               text: {
-                content: activity.duration
-              }
-            }
-          ]
+                content: activity.duration,
+              },
+            },
+          ],
         },
         'Elevation Gain': {
-          number: activity.elevation_gain
+          number: activity.elevation_gain,
         },
-        'Type': {
+        Type: {
           rich_text: [
             {
               text: {
-                content: activity.type
-              }
-            }
-          ]
+                content: activity.type,
+              },
+            },
+          ],
         },
-        'Date': {
+        Date: {
           date: {
-            start: activity.date
-          }
+            start: activity.date,
+          },
         },
         // 'Calories': {
         //   number: activity.calories || 0
         // }
-      }
-    });
+      },
+    })
   } catch (error) {
-    console.error('Error adding to Notion database:', error);
+    console.error('Error adding to Notion database:', error)
   }
 }
 
-export { existsAcitivity, addToNotionDatabase };
+export { existsAcitivity, addToNotionDatabase }

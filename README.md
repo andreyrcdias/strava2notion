@@ -1,18 +1,22 @@
 # strava2notion
+
 Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-strava-activity-in-notion)
 
 ## References
-* [Strava API v3 Reference](https://developers.strava.com/docs/reference/)
-* [Notion API Reference](https://developers.notion.com/reference/intro)
 
+- [Strava API v3 Reference](https://developers.strava.com/docs/reference/)
+- [Notion API Reference](https://developers.notion.com/reference/intro)
 
 ## Prerequisites
+
 - Node.js
 - A Strava Developer account
 - A Notion account
 
 ## Step 1: Get API Keys
+
 ### Strava API Key
+
 - Log in to your Strava account.
 - Go to [Strava API](https://www.strava.com/login).
 - Click on **Create An App**
@@ -20,6 +24,7 @@ Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-
 - Copy the Client ID and Client Secret.
 
 ### Notion API Key
+
 - Log in to your Notion account.
 - Go to [Notion Integrations](https://www.notion.so/my-integrations).
 - Click on **New Integration**.
@@ -27,7 +32,9 @@ Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-
 - Copy the generated Internal Integration Token.
 
 ## Step 2: Set Up Your Notion Database
+
 1. [Create a new database in Notion](https://www.notion.com/help/guides/creating-a-database) with the following properties:
+
 - ID (Title)
 - Name (Title)
 - Distance (Number)
@@ -37,15 +44,20 @@ Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-
 - Type (Text)
 - Date (Date)
 <!-- - Calories (Number) -->
+
 2. Share the database with your integration:
+
 - Click on the **three dots** in the top-right corner of the page.
 - Under Connections, click on **Connect** to and search for your integration and invite it.
 
 ## Step 3: Create `.env` file
+
 ```shell
 cp .env-example .env
 ```
+
 And set all the variables:
+
 ```shell
 NOTION_TOKEN=
 NOTION_DATABASE_ID=
@@ -59,32 +71,38 @@ STRAVA_REFRESH_TOKEN=
 > Please note that you will have to update your `.env` file with your `STRAVA_ACCESS_TOKEN` and `STRAVA_REFRESH_TOKEN` after completing Strava’s OAuth flow.
 
 ## Step 4: Install Packages
+
 ```shell
 npm install
 ```
 
 ## Step 5: Build the project
+
 ```shell
 npm run build
 ```
 
 ## Step 6: Run the OAuth Flow
+
 1. Start the OAuth Server:
+
 ```shell
 node run server
 ```
+
 2. Open your browser and navigate to http://localhost:3000:
-    - You should see a page with a link to authorize with Strava.
+   - You should see a page with a link to authorize with Strava.
 3. Click the link to authorize with Strava:
-    - This will redirect you to Strava's authorization page.
+   - This will redirect you to Strava's authorization page.
 4. Authorize the application:
-    - Strava will redirect you to a page with an authorization code.
+   - Strava will redirect you to a page with an authorization code.
 5. The server will exchange the authorization code for an access token and refresh token:
-    - The tokens will be displayed on the page.
+   - The tokens will be displayed on the page.
 6. Copy the refresh token and update your `.env` file with it.
 
-
 ## Step 7: Run the Integration
+
 ```shell
 npm start
 ```
+
