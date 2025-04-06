@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { getStravaActivities } from './strava'
-import { addToNotionDatabase, existsAcitivity } from './notion'
+import { addToNotionDatabase, existsActivity } from './notion'
 import { Activity } from './types'
 import { NOTION_DATABASE_ID } from './consts'
 
@@ -11,7 +11,7 @@ async function filterNewActivities(
 ): Promise<Activity[]> {
   const newActivities = await Promise.all(
     activities.map(async (activity) => {
-      const exists = await existsAcitivity(
+      const exists = await existsActivity(
         NOTION_DATABASE_ID as string,
         activity.id
       )

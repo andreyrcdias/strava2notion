@@ -6,7 +6,7 @@ import { Activity } from './types'
 dotenv.config()
 const notion = new Client({ auth: process.env.NOTION_TOKEN })
 
-async function existsAcitivity(
+async function existsActivity(
   databaseId: string,
   activityId: number
 ): Promise<boolean> {
@@ -100,4 +100,4 @@ async function addToNotionDatabase(
   }
 }
 
-export { existsAcitivity, addToNotionDatabase }
+export { existsActivity, addToNotionDatabase }
