@@ -109,19 +109,18 @@ async function getStravaActivities(): Promise<Activity[]> {
   }
 
   return activities.map((activity) => {
-    const paceInMinPerKm = convertPaceToMinPerKm(
-      activity.moving_time / 60 / (activity.distance / 1000)
-    )
-    const distanceInKm = Math.round((activity.distance / 1000) * 100) / 100 // Round to 2 decimal places
-
     return {
       id: activity.id,
       name: activity.name,
-      distance: distanceInKm,
-      pace: paceInMinPerKm,
+      // Round to 2 decimal places
+      distance: Math.round((activity.distance / 1000) * 100) / 100,
+      pace: convertPaceToMinPerKm(
+        activity.moving_time / 60 / (activity.distance / 1000)
+      ),
+      // Duration in HH:MM:SS
       duration: new Date(activity.moving_time * 1000)
         .toISOString()
-        .substr(11, 8), // Duration in HH:MM:SS
+        .substr(11, 8),
       elevation_gain: activity.total_elevation_gain,
       type: activity.type,
       date: activity.start_date,
