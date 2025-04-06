@@ -48,8 +48,6 @@ async function getStravaAccessToken(): Promise<string> {
   })
 }
 
-export { getStravaAccessToken }
-
 async function fetchJson(
   url: string,
   headers: Record<string, string>
