@@ -111,5 +111,5 @@ npm start
 ## Maintenance
 
 ```shell
-npx prettier --write .
+npm run format
 ```
