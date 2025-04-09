@@ -6,6 +6,8 @@ import { Activity } from './types'
 dotenv.config()
 const notion = new Client({ auth: process.env.NOTION_TOKEN })
 
+// TODO: create the Notion database programmatically
+
 async function existsActivity(
   databaseId: string,
   activityId: number

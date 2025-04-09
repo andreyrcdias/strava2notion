@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/main.js",
-    "server": "node dist/server.js"
+    "server": "node dist/server.js",
+    "format": "npx prettier --write ."
   },
   "dependencies": {
     "@notionhq/client": "^1.0.4",

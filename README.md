@@ -33,6 +33,8 @@ Based on [Log Strava Activity in Notion](https://developers.notion.com/page/log-
 
 ## Step 2: Set Up Your Notion Database
 
+<!-- TODO: create the Notion database programmatically -->
+
 1. [Create a new database in Notion](https://www.notion.com/help/guides/creating-a-database) with the following properties:
 
 - ID (Title)
