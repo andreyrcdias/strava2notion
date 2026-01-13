@@ -129,4 +129,15 @@ async function getStravaActivities(): Promise<Activity[]> {
   })
 }
 
-export { getStravaActivities }
+async function getAuthenticatedAthlete(): Promise<{ id: number }> {
+  const accessToken = await getStravaAccessToken()
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  }
+
+  const athleteUrl = 'https://www.strava.com/api/v3/athlete'
+  const athlete = await fetchJson(athleteUrl, headers)
+  return { id: athlete.id }
+}
+
+export { getStravaActivities, getAuthenticatedAthlete, }
